@@ -17,10 +17,13 @@
   },
   "homepage": "https://github.com/JeremyCodding/back-integral-m05-desafio-t04#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "knex": "^1.0.2",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "yup": "^0.32.11",
+    "yup-locales": "^1.2.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
