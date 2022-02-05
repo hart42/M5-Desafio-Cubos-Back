@@ -7,7 +7,7 @@ const cadastroUsuarioSchema = yup.object().shape({
     .required(),
 
   senha: yup
-    .string().
+    .string().min(6).
     required(),
 
   nome: yup
