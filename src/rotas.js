@@ -11,6 +11,7 @@ rotas.post('/login', login.login);
 
 rotas.use(filtroLogin);
 
-rotas.get('/perfil', usuarios.perfilUsuario);
+rotas.get('/perfil', usuarios.obterPerfilUsuario);
+rotas.put('/perfil', usuarios.editarPerfilUsuario);
 
 module.exports = rotas;
