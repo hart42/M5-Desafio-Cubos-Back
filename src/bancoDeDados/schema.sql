@@ -16,7 +16,7 @@ create table clientes (
   	nome text not null,
   	email text not null unique,
   	cpf char(12) not null unique,
-  	telefone integer not null,
+  	telefone text not null,
   	cep integer,
   	logradouro text,
   	complemento text,
@@ -24,4 +24,3 @@ create table clientes (
   	cidade text,
   	estado text
 );
-

@@ -1,4 +1,4 @@
-const knex = require('../banco de dados/conexao');
+const knex = require('../bancoDeDados/conexao');
 const jwt = require('jsonwebtoken');
 
 const filtroLogin = async (req, res, next) => {

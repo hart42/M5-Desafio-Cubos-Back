@@ -1,4 +1,4 @@
-const knex = require('../banco de dados/conexao');
+const knex = require('../bancoDeDados/conexao');
 const bcrypt = require('bcrypt');
 const cadastroUsuarioSchema = require('../validacoes/cadastroUsuarioSchema');
 
@@ -47,7 +47,9 @@ const perfilUsuario = async (req, res) => {
       return res.status(404).json('Usuario não encontrado');
     }
 
-    return res.status(200).json(usuario);
+    const { senha: _, ...dadosUsuario } = usuario;
+
+    return res.status(200).json(dadosUsuario);
     
   } catch (error) {
     return res.status(400).json(error.message); 
