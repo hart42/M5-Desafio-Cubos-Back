@@ -22,7 +22,7 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign({ id: usuario.id }, process.env.SENHA_JWT, { expiresIn: '8h' });
-
+    
     const { senha: _, ...dadosUsuario } = usuario; // para verificar se os dados estao corretos --- REMOVER!!!
 
     return res.status(200).json({
