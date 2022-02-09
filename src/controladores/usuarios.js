@@ -71,7 +71,12 @@ const editarPerfilUsuario = async (req, res) => {
     }
 
     if (senha) {
+      senha = senha.trim();
       senha = await bcrypt.hash(senha, 10);
+    }
+
+    if (!senha) {
+      senha = usuario.senha;
     }
 
     if (email !== usuario.email) {
