@@ -73,7 +73,31 @@ const listarClientes = async (req, res) => {
   }
 }
 
+const deletarCliente = async (req, res) => {
+  const { clienteId } = req;
+
+  try {
+    const verificarCliente = await knex('clientes').where({ clienteId });
+    
+    if(!verificarCliente) {
+      return res.status(404).json("Cliente não encontrado");
+    }
+
+    const excluirCliente = await knex('clientes').where({ clienteId }).del().returning('*');
+
+    if (!excluirCliente) {
+      return res.status(400).json("Cliente não foi deletado");
+    }
+
+    return res.status(200).json("cliente excluido com sucesso!");
+
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+}
+
 module.exports = {
   cadastrarCliente,
   listarClientes,
+  deletarCliente,
 }

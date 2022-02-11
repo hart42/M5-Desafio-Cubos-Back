@@ -17,5 +17,6 @@ rotas.put('/perfil', usuarios.editarPerfilUsuario);
 
 rotas.post('/clientes', clientes.cadastrarCliente);
 rotas.get('/clientes', clientes.listarClientes);
+rotas.delete('/clientes', clientes.deletarCliente);
 
 module.exports = rotas;
