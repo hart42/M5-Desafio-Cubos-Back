@@ -2,6 +2,8 @@ drop table if exists clientes;
 
 drop table if exists usuarios;
 
+drop table if exists cobrancas;
+
 create table usuarios (
 	id serial primary key,
   	nome text not null,
@@ -23,4 +25,13 @@ create table clientes (
   	bairro text,
   	cidade text,
   	estado text
+);
+
+create table cobrancas (
+	id: serial primary key,
+	idcliente:  foreign key,
+	descricao: text,
+	valor: number,
+	vencimento: date,
+	status: text
 );
