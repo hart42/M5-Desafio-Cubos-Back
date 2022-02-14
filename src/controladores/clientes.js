@@ -77,8 +77,6 @@ const listaCliente = async (req, res) => {
   try {
      const cliente = await knex('clientes').where({id}).select('*').first();
 
-     console.log(cliente) 
-
      if (cliente === undefined) {
        return res.status(404).json("O cliente procurado nao existe");
      }
