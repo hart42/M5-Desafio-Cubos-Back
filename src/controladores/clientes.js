@@ -57,6 +57,7 @@ const cadastrarCliente = async (req, res) => {
     return res.status(400).json(error.message); 
   }
 };
+
 const listarClientes = async (req, res) => {
   try {
     const clientes = await knex('clientes').select('id', 'nome', 'cpf', 'email', 'telefone');
@@ -70,6 +71,7 @@ const listarClientes = async (req, res) => {
   } catch (error) {
     return res.status(400).json(error.message); 
   }
+
 };
 const listaCliente = async (req, res) => {
   const id = req.params.id;
@@ -172,10 +174,8 @@ const deletarCliente = async (req, res) => {
   }
 };
 
+
 module.exports = {
   cadastrarCliente,
   listarClientes,
-  deletarCliente,
-  listaCliente,
-  editarCliente,
 }

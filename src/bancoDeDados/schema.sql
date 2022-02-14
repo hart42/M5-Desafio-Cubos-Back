@@ -25,6 +25,7 @@ create table clientes (
   	estado text
 );
 
+
 create table cobrancas (
 	id serial primary key,
 	cliente_id smallint REFERENCES clientes(id) NOT NULL,
@@ -34,3 +35,4 @@ create table cobrancas (
   	valor text not null,
   	vencimento date NOT NULL
 );
+
