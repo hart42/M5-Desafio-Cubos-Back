@@ -77,7 +77,9 @@ const listaCliente = async (req, res) => {
   try {
      const cliente = await knex('clientes').where({id}).select('*').first();
 
-     if (cliente[0] === undefined) {
+     console.log(cliente) 
+
+     if (cliente === undefined) {
        return res.status(404).json("O cliente procurado nao existe");
      }
 
@@ -112,17 +114,17 @@ const editarCliente = async (req, res) => {
 
     const verificarEmail = await knex('clientes').where({ email }).first();
 
-    if (verificarEmail) {
+    /* if (verificarEmail) {
       return res.status(401).json("Email ja cadastrado");
-    }
+    } */
 
     const verificarCpf = await knex('clientes')
       .where({ cpf })
       .first();
 
-    if (verificarCpf) {
+    /* if (verificarCpf) {
       return res.status(401).json("Cpf ja registrado em outro cliente");
-    }
+    } */
 
     const cliente = await knex('clientes')
       .update({
@@ -150,7 +152,7 @@ const editarCliente = async (req, res) => {
   }
 };
 const deletarCliente = async (req, res) => {
-  const id = req.params;
+  const { id } = req.params;
 
   try {
     const verificarCliente = await knex('clientes').where({ id });

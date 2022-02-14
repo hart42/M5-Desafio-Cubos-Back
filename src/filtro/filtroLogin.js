@@ -10,9 +10,7 @@ const filtroLogin = async (req, res, next) => {
 
   try {
     const token = authorization.split(" ")[1];
-    
     const { id } = jwt.verify(token, process.env.SENHA_JWT);
-
     const validarUsuario = knex('usuarios').where({ id }).first();
 
     if(!validarUsuario) {
