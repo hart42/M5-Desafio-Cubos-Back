@@ -27,11 +27,15 @@ create table clientes (
   	estado text
 );
 
+
+
 create table cobrancas (
-	id: serial primary key,
-	idcliente:  foreign key,
-	descricao: text,
-	valor: number,
-	vencimento: date,
-	status: text
+	id serial primary key,
+	cliente_id smallint REFERENCES clientes(id) NOT NULL,
+	cliente_nome text NOT NULL,
+  	descricao text,
+  	cobranca_status text NOT NULL,
+  	valor text not null,
+  	vencimento date NOT NULL
 );
+
