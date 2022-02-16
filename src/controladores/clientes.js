@@ -57,7 +57,6 @@ const cadastrarCliente = async (req, res) => {
     return res.status(400).json(error.message);
   }
 };
-
 const listarClientes = async (req, res) => {
   try {
     const clientes = await knex('clientes').select('id', 'nome', 'cpf', 'email', 'telefone');
@@ -112,19 +111,19 @@ const editarCliente = async (req, res) => {
       return res.status(404).json("O cliente procurado não foi encontrado!")
     }
 
-    const verificarEmail = await knex('clientes').where({ email }).first();
+    const verificarEmail = await knex('clientes').where({ email }).where(id , '!=', id).first();
 
-    /* if (verificarEmail) {
+    if (verificarEmail) {
       return res.status(401).json("Email ja cadastrado");
-    } */
+    }
 
     const verificarCpf = await knex('clientes')
-      .where({ cpf })
+      .where({ cpf }).where(id, '!=', id)
       .first();
 
-    /* if (verificarCpf) {
+    if (verificarCpf) {
       return res.status(401).json("Cpf ja registrado em outro cliente");
-    } */
+    }
 
     const cliente = await knex('clientes')
       .update({

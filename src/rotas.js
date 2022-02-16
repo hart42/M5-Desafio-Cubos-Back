@@ -22,7 +22,10 @@ rotas.get('/clientes/:id', clientes.listaCliente);
 rotas.put('/clientes/:id', clientes.editarCliente);
 rotas.delete('/clientes/:id', clientes.deletarCliente);
 
-
+rotas.get('/cobrancas', cobrancas.listarCobrancas);
+rotas.get('/cobrancas/:id', cobrancas.listaCobranca);
 rotas.post('/cobrancas', cobrancas.cadastrarCobranca);
+rotas.put('/cobrancas/:id', cobrancas.editarCobranca);
+rotas.delete('/clientes/:id', cobrancas.excluirCobranca);
 
 module.exports = rotas;
