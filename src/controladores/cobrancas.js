@@ -16,7 +16,7 @@ const listarCobrancas = async (req, res) => {
     return res.status(400).json(error.message);
   }
 };
-const listaCobranca = (req, res) => {
+const listaCobranca = async (req, res) => {
   const { id } = req.params;
 
   try {
