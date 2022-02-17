@@ -88,7 +88,7 @@ const listaCliente = async (req, res) => {
   }
 };
 const editarCliente = async (req, res) => {
-  const idCliente = req.params.id;
+  const id = req.params.id;
   const {
     nome,
     email,
@@ -111,14 +111,14 @@ const editarCliente = async (req, res) => {
       return res.status(404).json("O cliente procurado não foi encontrado!")
     }
 
-    const verificarEmail = await knex('clientes').where({ email }).where(id, '!=', idCliente).first();
+    const verificarEmail = await knex('clientes').where({ email }).where('id', '!=', id).first();
 
     if (verificarEmail) {
       return res.status(401).json("Email ja cadastrado");
     }
 
     const verificarCpf = await knex('clientes')
-      .where({ cpf }).where(id, '!=', idCliente)
+      .where({ cpf }).where('id', '!=', id)
       .first();
 
     if (verificarCpf) {
@@ -179,5 +179,5 @@ module.exports = {
   listarClientes,
   listaCliente,
   deletarCliente,
-  editarCliente
+  editarCliente,
 }
