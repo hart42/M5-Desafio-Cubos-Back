@@ -71,12 +71,12 @@ const editarCobranca = async (req, res) => {
       return res.status(404).json('Cobrança Não encontrada');
     }
 
-    const atualizarCobranca = await knes('cobrancas')
+    const atualizarCobranca = await knex('cobrancas')
       .where({ id })
-      .update({ 
-        descricao, 
-        valor, 
-        vencimento, 
+      .update({
+        descricao,
+        valor,
+        vencimento,
         cobranca_status
       });
 

@@ -26,6 +26,6 @@ rotas.get('/cobrancas', cobrancas.listarCobrancas);
 rotas.get('/cobrancas/:id', cobrancas.listaCobranca);
 rotas.post('/cobrancas', cobrancas.cadastrarCobranca);
 rotas.put('/cobrancas/:id', cobrancas.editarCobranca);
-rotas.delete('/clientes/:id', cobrancas.excluirCobranca);
+rotas.delete('/cobrancas/:id', cobrancas.excluirCobranca);
 
 module.exports = rotas;
