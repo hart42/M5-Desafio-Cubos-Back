@@ -16,6 +16,8 @@ rotas.use(filtroLogin);
 rotas.get('/perfil', usuarios.obterPerfilUsuario);
 rotas.put('/perfil', usuarios.editarPerfilUsuario);
 
+rotas.get('/clientes/home', clientes.clientesDaHome);
+
 rotas.post('/clientes', clientes.cadastrarCliente);
 rotas.get('/clientes', clientes.listarClientes);
 rotas.get('/clientes/:id', clientes.listaCliente);
