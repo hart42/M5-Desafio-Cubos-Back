@@ -71,12 +71,12 @@ const editarCobranca = async (req, res) => {
       return res.status(404).json('Cobrança Não encontrada');
     }
 
-    const atualizarCobranca = await knes('cobrancas')
+    const atualizarCobranca = await knex('cobrancas')
       .where({ id })
-      .update({ 
-        descricao, 
-        valor, 
-        vencimento, 
+      .update({
+        descricao,
+        valor,
+        vencimento,
         cobranca_status
       });
 
@@ -93,13 +93,13 @@ const excluirCobranca = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const verificaCobranca = await knex('cobranca').where({ id });
+    const verificaCobranca = await knex('cobrancas').where({ id });
 
     if (!verificaCobranca) {
       return res.status(404).json("Cobrança não encontrada!");
     }
 
-    const excluirCobranca = await knex('cobranca').where({ id }).del().returning('*');
+    const excluirCobranca = await knex('cobrancas').where({ id }).del().returning('*');
 
     if (!excluirCobranca) {
       return res.status(400).json("A cobrança não pôde ser deletada!");

@@ -16,6 +16,8 @@ rotas.use(filtroLogin);
 rotas.get('/perfil', usuarios.obterPerfilUsuario);
 rotas.put('/perfil', usuarios.editarPerfilUsuario);
 
+rotas.get('/clientes/home', clientes.clientesDaHome);
+
 rotas.post('/clientes', clientes.cadastrarCliente);
 rotas.get('/clientes', clientes.listarClientes);
 rotas.get('/clientes/:id', clientes.listaCliente);
@@ -26,6 +28,6 @@ rotas.get('/cobrancas', cobrancas.listarCobrancas);
 rotas.get('/cobrancas/:id', cobrancas.listaCobranca);
 rotas.post('/cobrancas', cobrancas.cadastrarCobranca);
 rotas.put('/cobrancas/:id', cobrancas.editarCobranca);
-rotas.delete('/clientes/:id', cobrancas.excluirCobranca);
+rotas.delete('/cobrancas/:id', cobrancas.excluirCobranca);
 
 module.exports = rotas;

@@ -111,14 +111,14 @@ const editarCliente = async (req, res) => {
       return res.status(404).json("O cliente procurado não foi encontrado!")
     }
 
-    const verificarEmail = await knex('clientes').where({ email }).where(id , '!=', id).first();
+    const verificarEmail = await knex('clientes').where({ email }).where('id', '!=', id).first();
 
     if (verificarEmail) {
       return res.status(401).json("Email ja cadastrado");
     }
 
     const verificarCpf = await knex('clientes')
-      .where({ cpf }).where(id, '!=', id)
+      .where({ cpf }).where('id', '!=', id)
       .first();
 
     if (verificarCpf) {
@@ -172,6 +172,55 @@ const deletarCliente = async (req, res) => {
     return res.status(400).json(error.message);
   }
 };
+const clientesDaHome = async (req, res) => {
+  try {
+    const timeStampAtual = +new Date();
+    const idsClientes = [];
+    const inadimplentes = [];
+    const adimplentes = [];
+
+    const cobrancas = await knex('cobrancas').select('cliente_id', 'cobranca_status', 'vencimento');
+    const clientes = await knex('clientes').select('nome', 'id', 'cpf');
+
+    if(clientes[0] === undefined) {
+      return res.status(400).json("Não foi encontrado nenhum cliente!");
+    }
+    if (cobrancas[0] === undefined) {
+      return res.status(400).json("Não foi encontrado nenhuma cobrança!");
+    }
+
+    const cobrancasPendentes = cobrancas.filter(cobranca => {
+      cobranca.cobranca_status === "pendente";
+    });
+
+    const cobrancasVencidas = cobrancasPendentes.filter(cobranca => {
+      +new Date(cobranca.vencimento) < timeStampAtual;
+    });
+
+    for (let cobranca of cobrancasVencidas) {
+      if ( !idsClientes.includes(cobranca.cliente_id) ) {
+        idsClientes.push(cobranca.cliente_id);
+      }
+    };
+    for (let cliente of clientes) {
+      if ( idsClientes.includes(cliente.id) ) {
+        inadimplentes.push(cliente);
+      } else {
+        adimplentes.push(cliente);
+      }
+    };
+
+    const resposta = {
+      inadimplentes,
+      adimplentes
+    }
+
+    return res.status(200).json(JSON.stringify(resposta));
+
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+}
 
 
 module.exports = {
@@ -180,4 +229,5 @@ module.exports = {
   listaCliente,
   deletarCliente,
   editarCliente,
+  clientesDaHome,
 }
