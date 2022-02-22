@@ -180,7 +180,7 @@ const clientesDaHome = async (req, res) => {
     const adimplentes = [];
 
     const cobrancas = await knex('cobrancas').select('cliente_id', 'cobranca_status', 'vencimento');
-    const clientes = await knex('clientes').select('nome', 'id', 'cpf');
+    const clientes = await knex('clientes').select('*');
 
     if(clientes[0] === undefined) {
       return res.status(400).json("Não foi encontrado nenhum cliente!");
