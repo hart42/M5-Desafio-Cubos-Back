@@ -180,7 +180,7 @@ const clientesDaHome = async (req, res) => {
     const adimplentes = [];
 
     const cobrancas = await knex('cobrancas').select('cliente_id', 'cobranca_status', 'vencimento');
-    const clientes = await knex('clientes').select('nome', 'id', 'cpf');
+    const clientes = await knex('clientes').select('*');
 
     if(clientes[0] === undefined) {
       return res.status(400).json("Não foi encontrado nenhum cliente!");
@@ -189,13 +189,9 @@ const clientesDaHome = async (req, res) => {
       return res.status(400).json("Não foi encontrado nenhuma cobrança!");
     }
 
-    const cobrancasPendentes = cobrancas.filter(cobranca => {
-      cobranca.cobranca_status === "pendente";
-    });
+    const cobrancasPendentes = cobrancas.filter(cobranca => cobranca.cobranca_status === 'pendente');
 
-    const cobrancasVencidas = cobrancasPendentes.filter(cobranca => {
-      +new Date(cobranca.vencimento) < timeStampAtual;
-    });
+    const cobrancasVencidas = cobrancasPendentes.filter(cobranca => +new Date(cobranca.vencimento) < timeStampAtual);
 
     for (let cobranca of cobrancasVencidas) {
       if ( !idsClientes.includes(cobranca.cliente_id) ) {
@@ -215,7 +211,7 @@ const clientesDaHome = async (req, res) => {
       adimplentes
     }
 
-    return res.status(200).json(JSON.stringify(resposta));
+    return res.status(200).json((resposta));
 
   } catch (error) {
     return res.status(400).json(error.message);
